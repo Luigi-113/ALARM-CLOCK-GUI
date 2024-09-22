@@ -2,6 +2,7 @@
 import time
 import sys
 import pygame
+import msvcrt
 
 import msvcrt
 
@@ -34,7 +35,9 @@ print(f"time:\n Hours:{timerhrs} Minutes:{timermins} Seconds: {timersecs} ")# pr
 for i in range (timeup,0,-1):
   time.sleep(1)
   print(f'time in seconds:{i})
-
+  if msvcrt.kbhit():
+    if msvcrt.getwche() == "\r":
+      break
   
  
 print("your timer is finished")
