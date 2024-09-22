@@ -10,17 +10,29 @@ pygame.mixer.init() #initialise the mixer
 
 pygame.mixer.music.load('classic_alarm.WAV')
 
+def endtimer_nat()
+  print("your timer is finished")
+  pygame.mixer.music.play(loops=-1, start=0, fade_ms=0)
+  stop= input("press y to stop alarm")
+  if stop == "y":
+    pygame.mixer.music.stop()
+  
+
 
 
 #curr = time.time()# time in sec (float)
 curr2 = time.ctime() # time as date + time (str)
 
+while True:
+  try:
+    timerhrs= int(input ("Hours:")) # hours 
 
-timerhrs= int(input ("Hours:")) # hours 
+    timermins= int(input("Mins:"))# minutes
 
-timermins= int(input("Mins:"))# minutes
-
-timersecs= int(input("Seconds: "))# seconds
+    timersecs= int(input("Seconds: "))# seconds
+    break
+  except ValueError:
+    print("please enter a valid number")
 
 timerhrs2= timerhrs * 3600 #hours as seconds
 
@@ -64,7 +76,6 @@ timerlength = [timerhrs2, timermins2, timersecs] # total time as seconds as a li
 timeup = sum(timerlength) # sum of total time in seconds 
 print(f"time:\n Hours:{timerhrs} Minutes:{timermins} Seconds: {timersecs} ")# prints hh:mm:ss
 
-
 for i in range (timeup,0,-1):
   if i >= 3600:# i= time in seconds
     hrs= int (i/3600) # calc complete hrs
@@ -94,16 +105,17 @@ for i in range (timeup,0,-1):
         secs =  f"0{i}"
   time.sleep(1)
   print(f"hours: {hrs} mins: {mins} secs: {secs}",end='\r')
+  
   if msvcrt.kbhit():
     if msvcrt.getwche() == ('\r'):
+      print("you have chosen to exit the countdown timer") 
       break
+
+else:
+  endgame_nat() #why does this work 
+
 
   
  
-print("your timer is finished")
-pygame.mixer.music.play(loops=-1, start=0, fade_ms=0)
-stop= input("press y to stop alarm")
-if stop == "y":
-  pygame.mixer.music.stop()
-  
+
 
