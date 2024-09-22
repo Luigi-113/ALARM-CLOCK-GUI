@@ -32,12 +32,72 @@ timeup = sum(timerlength) # sum of total time in seconds
 print(f"time:\n Hours:{timerhrs} Minutes:{timermins} Seconds: {timersecs} ")# prints hh:mm:ss
 
 
+# countdown timer taking user input
+import time
+import sys
+import pygame
+
+import msvcrt
+
+pygame.mixer.init() #initialise the mixer 
+
+pygame.mixer.music.load('classic_alarm.WAV')
+
+
+
+#curr = time.time()# time in sec (float)
+curr2 = time.ctime() # time as date + time (str)
+
+
+timerhrs= int(input ("Hours:")) # hours 
+
+timermins= int(input("Mins:"))# minutes
+
+timersecs= int(input("Seconds: "))# seconds
+
+timerhrs2= timerhrs * 3600 #hours as seconds
+
+timermins2 = timermins * 60 #minutes as seconds
+
+timerlength = [timerhrs2, timermins2, timersecs] # total time as seconds as a lists
+
+timeup = sum(timerlength) # sum of total time in seconds 
+print(f"time:\n Hours:{timerhrs} Minutes:{timermins} Seconds: {timersecs} ")# prints hh:mm:ss
+
+
 for i in range (timeup,0,-1):
+  if i >= 3600:# i= time in seconds
+    hrs= int (i/3600) # calc complete hrs
+    if hrs <10 :
+      hrs= f"0{hrs}"
+    minsold = i%3600 # calc remainder of hrs in seconds 
+    mins= int(minsold/60) #calc complete mins form minsold
+    if mins <10:
+      mins = f"0{mins}"
+    secs=minsold%60 #calc remainder secs after finding complete mins
+    if secs < 10:
+      secs= f"0{secs}"
+  elif  i < 3600:
+    if i >= 60:
+      hrs= "00"
+      mins= int(timeup/60)
+      if mins< 10:
+        mins = f"0{mins}" 
+      secs= i%60
+      if secs < 10:
+        secs= f"0{secs}"
+    else:
+      hrs="00" 
+      mins= "00"
+      secs= i
+      if secs < 10:
+        secs =  f"0{i}"
   time.sleep(1)
-  print(f'time in seconds:{i},end='\r')
+  print(f"hours: {hrs} mins: {mins} secs: {secs}",end='\r')
   if msvcrt.kbhit():
-    if msvcrt.getwche() == "\r":
+    if msvcrt.getwche() == ('\r'):
       break
+
   
  
 print("your timer is finished")
